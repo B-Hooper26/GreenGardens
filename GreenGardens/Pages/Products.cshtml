@@ -37,11 +37,15 @@
                 <td>@product.Description</td>
                 <td>@product.Stock_Quantity</td>
                 <td>@product.Expected_Stock</td>
-                <td>@product.ImagePath</td>
-
-
                 <td>
                     <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-page="/Edit" asp-route-id="@product.Productid" class="btn btn-primary">Edit</a>
+                        <a asp-page="/Delete" asp-route-id="@product.Productid" class="btn btn-danger">Delete</a>
+                    }
                 </td>
             </tr>
         }

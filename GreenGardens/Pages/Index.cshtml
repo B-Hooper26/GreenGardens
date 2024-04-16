@@ -17,7 +17,7 @@
 
 <table class="table">
     <thead>
-        <tr>
+        <tr style="text-align: center">
             <th>Name</th>
             <th>Price</th>
             <th>Description</th>
@@ -29,17 +29,14 @@
     <tbody>
         @foreach (var product in Model.products)
         {
-            <tr>
+            <tr style="text-align: center">
                 <td>@product.Name</td> 
                 <td>@product.Price</td> 
                 <td>@product.Description</td>
                 <td>@product.Stock_Quantity</td>
                 <td>@product.Expected_Stock</td>
-                <td>@product.ImagePath</td>
-
-
                 <td>
-                    <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    <img src="@product.ImagePath" alt="Product Image" style="width:70px">
                 </td>
             </tr>
         }
