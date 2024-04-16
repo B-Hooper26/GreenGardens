@@ -5,6 +5,15 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to green gardens</h1>
+    <p>Start shopping here today!</p>
 </div>
+
+@{
+    foreach(var item in Model.products){
+    <h1>@item.Name</h1>
+    }
+}
+
+
+

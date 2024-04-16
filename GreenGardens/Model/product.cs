@@ -5,7 +5,7 @@ namespace GreenGardens.Model
     public class product //Creating the table for each product
     {
         [Key]
-        public int Productid { get; set; }
+        public Guid Productid { get; set; }
 
         [Required, StringLength(100)]
         public string Name { get; set; }
@@ -20,6 +20,7 @@ namespace GreenGardens.Model
         public int Expected_Stock { get; set; }
 
         public string ImagePath { get; set; }
+       
 
     }
 }

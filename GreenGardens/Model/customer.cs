@@ -1,0 +1,27 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace GreenGardens.Model
+{
+    public class customer
+    {
+
+        [Key]
+        public Guid Customerid { get; set; }
+
+        [Required, StringLength(100)]
+        public string f_name { get; set; }
+        [Required, StringLength(100)]
+        public string s_name { get; set; }
+
+        [Required, StringLength(100)]
+        public string email { get; set; }
+
+
+        [Required, StringLength(100)]
+        public string password { get; set; }
+
+    
+        
+
+    }
+}
