@@ -4,6 +4,12 @@
     ViewData["Title"] = "Products";
 
 }
+@if (User.Identity.IsAuthenticated)
+{
+    <form method="get" asp-page="/Logout">
+        <button type="submit" class="btn btn-warning">Logout</button>
+    </form>
+}
 
 <h2>Products</h2>
 

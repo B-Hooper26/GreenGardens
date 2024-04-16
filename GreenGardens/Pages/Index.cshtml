@@ -6,19 +6,48 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome to Green Gardens</h1>
-    <p>You can browse products now!</p>
-    <p>Log in to shop now!</p>
+    <p>You can browse the products now. If you wish to shop, please log in.</p>
     <!-- Submit Button -->
     <div class="form-group">
-        <a asp-page="Register"  class="btn btn-primary">Register</a><!-- Takes user to the login page-->
+        <a asp-page="Login"  class="btn btn-primary">Log in</a><!-- Takes user to the login page-->
     </div>
 </div>
 
-@{
-    foreach(var item in Model.products){
-    <h1>@item.Name</h1>
-    }
-}
+<h2>Products</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.products)
+        {
+            <tr>
+                <td>@product.Name</td> 
+                <td>@product.Price</td> 
+                <td>@product.Description</td>
+                <td>@product.Stock_Quantity</td>
+                <td>@product.Expected_Stock</td>
+                <td>@product.ImagePath</td>
+
+
+                <td>
+                    <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                </td>
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
 
 
 
