@@ -38,7 +38,7 @@ namespace GreenGardens.Pages
             Customer.password = HashPassword(Customer.password); // Hash the password before saving
             _context.customer.Add(Customer); // Add the new user to the database
             _context.SaveChanges(); // Commit the changes to the database
-            return RedirectToPage("Index"); // Redirect to the login page on successful registration
+            return RedirectToPage("Login"); // Redirect to the login page on successful registration
         }
 
         // Method to hash the password using a secure hash algorithm
