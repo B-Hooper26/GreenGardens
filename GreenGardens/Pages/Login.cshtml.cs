@@ -55,7 +55,7 @@ namespace GreenGardens.Pages
                     new ClaimsPrincipal(claimsIdentity),
                     authProperties);
 
-                return RedirectToPage("Index"); // Redirect to the Index page after successful login
+                return RedirectToPage("product"); // Redirect to the Index page after successful login
             }
 
             return Page(); // Or provide a user-friendly error message
