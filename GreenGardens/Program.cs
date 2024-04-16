@@ -20,6 +20,15 @@ builder.Services.AddSingleton<order>();
 builder.Services.AddSingleton<customer>();
 
 
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Login";
+        options.LogoutPath = "/Logout";
+        // Configure other options as needed
+    });
+
+
 
 // Register services for MVC Controllers and Views. This is essential for applications using the MVC architecture.
 builder.Services.AddControllersWithViews();
@@ -44,6 +53,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication(); // Ensure this call is before UseAuthorization
 app.UseAuthorization();
 
 app.MapRazorPages();
