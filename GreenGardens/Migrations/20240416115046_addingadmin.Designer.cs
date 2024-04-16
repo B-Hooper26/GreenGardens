@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenGardens.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240416093228_addingcustomer")]
-    partial class addingcustomer
+    [Migration("20240416115046_addingadmin")]
+    partial class addingadmin
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -117,11 +117,10 @@ namespace GreenGardens.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("Expected_Stock")
+                    b.Property<int?>("Expected_Stock")
                         .HasColumnType("int");
 
                     b.Property<string>("ImagePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
@@ -132,7 +131,7 @@ namespace GreenGardens.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("Stock_Quantity")
+                    b.Property<int?>("Stock_Quantity")
                         .HasColumnType("int");
 
                     b.HasKey("Productid");

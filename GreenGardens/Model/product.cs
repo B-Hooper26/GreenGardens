@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GreenGardens.Model
 {
@@ -15,11 +16,16 @@ namespace GreenGardens.Model
 
         [StringLength(255)]
         public string Description { get; set; }
-        public int Stock_Quantity { get; set; }
 
-        public int Expected_Stock { get; set; }
+        [AllowNull]
+        public int? Stock_Quantity { get; set; }
 
-        public string ImagePath { get; set; }
+        [AllowNull]
+
+        public int? Expected_Stock { get; set; }
+
+        [AllowNull]
+        public string? ImagePath { get; set; }
        
 
     }

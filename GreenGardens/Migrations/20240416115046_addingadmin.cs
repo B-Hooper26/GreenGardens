@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreenGardens.Migrations
 {
-    public partial class addingcustomer : Migration
+    public partial class addingadmin : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,9 +61,9 @@ namespace GreenGardens.Migrations
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Stock_Quantity = table.Column<int>(type: "int", nullable: false),
-                    Expected_Stock = table.Column<int>(type: "int", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Stock_Quantity = table.Column<int>(type: "int", nullable: true),
+                    Expected_Stock = table.Column<int>(type: "int", nullable: true),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
