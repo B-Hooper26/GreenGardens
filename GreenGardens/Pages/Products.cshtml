@@ -43,8 +43,8 @@
                 <td>
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <a asp-page="/Edit" asp-route-id="@product.Productid" class="btn btn-primary">Edit</a>
-                        <a asp-page="/Delete" asp-route-id="@product.Productid" class="btn btn-danger">Delete</a>
+                        <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary">Edit</a>
+                        <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-danger">Delete</a>
                     }
                 </td>
             </tr>

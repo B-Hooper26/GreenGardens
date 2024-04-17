@@ -19,9 +19,9 @@ namespace GreenGardens.Pages
             _dbConnection = context;
         }
 
-        public async Task<IActionResult> OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(Guid Productid)
         {
-            Item = await _dbConnection.product.FindAsync(id);
+            Item = await _dbConnection.product.FindAsync(Productid);
 
             if (Item == null)
             {
@@ -51,12 +51,14 @@ namespace GreenGardens.Pages
             itemToUpdate.Description = Item.Description;
             itemToUpdate.Stock_Quantity = Item.Stock_Quantity;
             itemToUpdate.Expected_Stock = Item.Expected_Stock;
+            itemToUpdate.ImagePath = Item.ImagePath;
+
 
 
             // Save the changes
             await _dbConnection.SaveChangesAsync();
 
-            return RedirectToPage("Index");
+            return RedirectToPage("Products");
         }
     }
 }

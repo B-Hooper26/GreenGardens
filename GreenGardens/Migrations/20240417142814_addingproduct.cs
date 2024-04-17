@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreenGardens.Migrations
 {
-    public partial class addingadmin : Migration
+    public partial class addingproduct : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
