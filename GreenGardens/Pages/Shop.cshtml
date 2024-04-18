@@ -36,6 +36,15 @@
                 <td>
                     <img src="@product.ImagePath" alt="Product Image" style="width:100px">
                 </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+                    {
+                        <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary">Edit</a>
+                        <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary">Delete</a>
+
+
+                    }
+                </td>
             </tr>
         }
 
