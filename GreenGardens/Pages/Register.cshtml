@@ -29,6 +29,11 @@
             <label>Password:</label>
             <input asp-for="Customer.password" type="password" class="form-control" />
         </div>
+        <!-- Admin Field -->
+        <div class="form-group">
+            <label>Are you an Admin:</label>
+            <input type="checkbox" asp-for="Customer.Admin" />
+        </div>
 
         <!-- Submit Button -->
         <div class="form-group">

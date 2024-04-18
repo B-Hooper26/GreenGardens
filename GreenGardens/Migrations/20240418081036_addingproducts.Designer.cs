@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenGardens.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240417142814_addingproduct")]
-    partial class addingproduct
+    [Migration("20240418081036_addingproducts")]
+    partial class addingproducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,6 +60,9 @@ namespace GreenGardens.Migrations
                     b.Property<Guid>("Customerid")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Admin")
+                        .HasColumnType("bit");
 
                     b.Property<string>("email")
                         .IsRequired()

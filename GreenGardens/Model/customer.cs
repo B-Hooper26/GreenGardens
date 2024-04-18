@@ -24,6 +24,9 @@ namespace GreenGardens.Model
         [AllowNull]
         public int? loyalty_points { get; set; }
 
+        [Required]
+        public bool Admin { get; set; }
+
     
         
 

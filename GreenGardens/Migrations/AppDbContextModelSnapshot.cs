@@ -59,6 +59,9 @@ namespace GreenGardens.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Admin")
+                        .HasColumnType("bit");
+
                     b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(100)

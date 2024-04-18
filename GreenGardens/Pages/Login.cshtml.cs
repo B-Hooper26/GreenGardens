@@ -45,6 +45,7 @@ namespace GreenGardens.Pages
                     new Claim(ClaimTypes.Name, user.f_name),
                     new Claim(ClaimTypes.Email, user.email),
                     // Add more claims as needed
+                    new Claim(ClaimTypes.Role, user.Admin ? "Admin" : "User") // Add admin role to claims
                 };
 
                 var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -54,8 +55,15 @@ namespace GreenGardens.Pages
                     CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity),
                     authProperties);
+                if(user.Admin == true)
+                {
+                    return RedirectToPage("Products");
+                }
+                else
+                {
+                    return RedirectToPage("Shop"); // Redirect to the Products page after successful login
+                }
 
-                return RedirectToPage("Products"); // Redirect to the Products page after successful login
             }
 
             return Page(); // Or provide a user-friendly error message
