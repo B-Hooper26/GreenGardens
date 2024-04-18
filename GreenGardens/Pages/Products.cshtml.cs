@@ -23,4 +23,6 @@ namespace GreenGardens.Pages
             Products = _db.product.ToList();
         }
     }
+
+
 }

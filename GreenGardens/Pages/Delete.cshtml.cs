@@ -31,7 +31,7 @@ namespace GreenGardens.Pages
             {
                 _dbConnection.product.Remove(itemToDelete);
                 await _dbConnection.SaveChangesAsync();
-                return RedirectToPage("Index");
+                return RedirectToPage("Products");
             }
             else
             {
