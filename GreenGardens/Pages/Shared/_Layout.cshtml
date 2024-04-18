@@ -22,10 +22,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">All Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Basket</a>
-                        </li>
-                        if(!User.Identity.IsAuthenticated){
+                        @if(!User.Identity.IsAuthenticated){
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Shop">Login</a>
+                            </li>
+                        }
+                        @if(!User.Identity.IsAuthenticated){
                             <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
                             </li>
@@ -35,9 +37,11 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
                             </li>
                         }
-                        <li class="nav-item">
+                        @if(!User.Identity.IsAuthenticated){
+                            <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Register">Register</a>
-                        </li>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
