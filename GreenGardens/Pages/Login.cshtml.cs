@@ -57,11 +57,11 @@ namespace GreenGardens.Pages
                     authProperties);
                 if(user.Admin == true)
                 {
-                    return RedirectToPage("Products");
+                    return RedirectToPage("Products"); //Redirects admin to the admin page
                 }
                 else
                 {
-                    return RedirectToPage("Shop"); // Redirect to the Products page after successful login
+                    return RedirectToPage("Shop"); // Redirect customers to the shop if successfull
                 }
 
             }
