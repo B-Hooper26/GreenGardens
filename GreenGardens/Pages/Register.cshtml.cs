@@ -34,7 +34,7 @@ namespace GreenGardens.Pages
             {
                 return Page(); // Return to the page if validation fails
             }
-
+            Customer.loyalty_points = 0;
             Customer.password = HashPassword(Customer.password); // Hash the password before saving
             _context.customer.Add(Customer); // Add the new user to the database
             _context.SaveChanges(); // Commit the changes to the database

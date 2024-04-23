@@ -3,15 +3,17 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome to Green Gardens</h1>
-    <p>You can browse the products now. If you wish to shop, please log in.</p>
-    <!-- Submit Button -->
-    <div class="form-group">
-        <a asp-page="Login"  class="btn btn-primary">Log in</a><!-- Takes user to the login page-->
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Green Gardens</h1>
+        <p>You can browse the products now. If you wish to shop, please log in.</p>
+        <!-- Submit Button -->
+        <div class="form-group">
+            <a asp-page="Login" class="btn btn-primary">Log in</a><!-- Takes user to the login page-->
+        </div>
     </div>
-</div>
+}
 
 <h2>Products</h2>
 
@@ -29,7 +31,7 @@
         {
             <tr style="text-align: center">
                 <td>@product.Name</td> 
-                <td>@product.Price</td> 
+                <td>£@product.Price</td> 
                 <td>@product.Description</td>
                 <td>
                     <img src="@product.ImagePath" alt="Product Image" style="width:70px">

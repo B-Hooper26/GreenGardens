@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreenGardens.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240418081036_addingproducts")]
-    partial class addingproducts
+    [Migration("20240423081036_addingproduct")]
+    partial class addingproduct
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -74,7 +74,7 @@ namespace GreenGardens.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("loyalty_points")
+                    b.Property<int>("loyalty_points")
                         .HasColumnType("int");
 
                     b.Property<string>("password")

@@ -6,13 +6,13 @@
 
 
 <div>
-	<h2>Stock Quantity for each item</h2>
+	<h2>Stock Quantity and Expectancy for each item</h2>
 	<canvas id="Quantitygraph"></canvas>
 </div>
 
 @section Scripts {
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+<script >
 		var ctx = document.getElementById('Quantitygraph').getContext('2d');
 			var tasksData = @Html.Raw(Model.ProductJson);
 			var tasksGraph = new Chart(ctx, {
@@ -21,12 +21,20 @@
 				labels: tasksData.map(t => new String(t.Name).toString()),
 			datasets: [{
 				label: 'Quantity of stock',
-					data: tasksData.map(t => t.Stock_Quantity),
-				backgroundColor: 'rgba(54, 162, 235, 0.2)',
-				borderColor: 'rgba(54, 162, 235, 1)',
-				borderWidth: 1
-				
-			}]
+				data: tasksData.map(t => t.Stock_Quantity),
+					backgroundColor: 'rgba(7, 229, 7, 0.33)',
+				borderColor: 'black',
+				borderWidth: 1,
+			},
+				{
+					label: 'Expected Stock',
+					data: tasksData.map(t => t.Expected_Stock),
+					backgroundColor: 'rgba(7, 0, 255, 0.33)',
+					borderColor: 'black',
+					borderWidth: 1,
+				},
+
+			]
 		},
 		options: {
 			scales: {

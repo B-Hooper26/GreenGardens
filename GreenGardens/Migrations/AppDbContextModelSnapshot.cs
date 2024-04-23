@@ -72,7 +72,7 @@ namespace GreenGardens.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int?>("loyalty_points")
+                    b.Property<int>("loyalty_points")
                         .HasColumnType("int");
 
                     b.Property<string>("password")
