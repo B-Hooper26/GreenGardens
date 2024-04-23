@@ -46,3 +46,138 @@
 	});
 </script>
 }
+    <h2>Under stock products</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Stock Quantity</th>
+                <th>Expected Stock</th>
+                <th>Stock Level</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Model.Products)//layout the table of products that are under stock
+        {
+            @if (product.Expected_Stock > @product.Stock_Quantity)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>£@product.Price</td>
+                    <td>@product.Description</td>
+                    <td>@product.Stock_Quantity</td>
+                    <td>@product.Expected_Stock</td>
+                    <td>Low Stock Levels</td>
+                    <td>
+                        <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<h2>Highest to Lowest</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products.OrderByDescending(l => l.Price).Take(5))
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>£@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Stock_Quantity</td>
+                <td>@product.Expected_Stock</td>
+                <td>High Stock Levels</td>
+                <td>
+                    <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<h2>Lowest to highest </h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products.OrderBy(l => l.Price).Take(5))
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>£@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Stock_Quantity</td>
+                <td>@product.Expected_Stock</td>
+                <td>High Stock Levels</td>
+                <td>
+                    <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<h2>Over stock products</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)//layout the table of products that are overstocked
+        {
+            @if (product.Expected_Stock < @product.Stock_Quantity)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>£@product.Price</td>
+                    <td>@product.Description</td>
+                    <td>@product.Stock_Quantity</td>
+                    <td>@product.Expected_Stock</td>
+                    <td>High Stock Levels</td>
+                    <td>
+                        <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    </td>
+                </tr>
+            }
+        }
+
+
+
+
+    </tbody>
+</table>
