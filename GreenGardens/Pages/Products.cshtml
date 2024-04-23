@@ -1,5 +1,7 @@
 ﻿@page
 @model GreenGardens.Pages.ProductsModel
+
+<!--ADMIN PAGE-->
 @{
     ViewData["Title"] = "Products";
 
@@ -104,8 +106,6 @@
                 </tr>
             }
 
-
-
         }
     </tbody>
 </table>
@@ -179,13 +179,44 @@
 
 
         </tbody>
+</table>
+
+<h2>Customers</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Second Name</th>
+            <th>Email</th>
+            <th>Loyalty points </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        
+        @foreach (var product in Model.user)//layout the table of products
+        {
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+            {
+                <tr>
+                    <td>@product.f_name</td>
+                    <td>@product.s_name</td>
+                    <td>@product.email</td>
+                    <td>@product.loyalty_points</td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+                        {
+                            <a asp-page="/EditCustomer" asp-route-Customerid="@product.Customerid" class="btn btn-primary">Edit</a>
+                            //<a asp-page="/Delete" asp-route-Productid="@product.Customerid" class="btn btn-primary">Delete</a>
 
 
+                        }
+                    </td>
+                </tr>
 
-
-
-
-
-
+            }
+        }
+    </tbody>
 </table>
 

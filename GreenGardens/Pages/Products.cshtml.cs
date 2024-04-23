@@ -12,6 +12,8 @@ namespace GreenGardens.Pages
         private readonly AppDbContext _db;
 
         public List<product> Products { get; set; }
+        public List<customer> user { get; set; }
+
 
         public ProductsModel (AppDbContext db)
         {
@@ -21,6 +23,8 @@ namespace GreenGardens.Pages
         public void OnGet()
         {
             Products = _db.product.ToList();
+            user = _db.customer.ToList();
+
         }
     }
 
