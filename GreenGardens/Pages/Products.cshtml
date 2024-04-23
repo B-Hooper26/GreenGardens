@@ -143,6 +143,28 @@
     </tbody>
 </table>
 
+<h2>Under stock products</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Products.OrderByDescending(l => l.Price).Take(5))
+        {
+
+        }
+        
+    </tbody>
+</table>
+
 <h2>Over stock products</h2>
     <table class="table">
         <thead>
@@ -199,16 +221,20 @@
         {
             @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
             {
+                
                 <tr>
                     <td>@product.f_name</td>
                     <td>@product.s_name</td>
                     <td>@product.email</td>
                     <td>@product.loyalty_points</td>
                     <td>
+
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
                         {
-                            <a asp-page="/EditCustomer" asp-route-Customerid="@product.Customerid" class="btn btn-primary">Edit</a>
-                            //<a asp-page="/Delete" asp-route-Productid="@product.Customerid" class="btn btn-primary">Delete</a>
+                            @if(@product.Admin == false){
+                                <a asp-page="/EditCustomer" asp-route-Customerid="@product.Customerid" class="btn btn-primary">Edit</a>
+                                <a asp-page="/DeleteCustomer" asp-route-Customerid="@product.Customerid" class="btn btn-primary">Delete</a>
+                            }
 
 
                         }

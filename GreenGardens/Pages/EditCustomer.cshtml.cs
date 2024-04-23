@@ -12,7 +12,7 @@ namespace GreenGardens.Pages
         private readonly AppDbContext _dbConnection;
 
         [BindProperty]
-        public customer Item { get; set; }
+        public customer Customer { get; set; }
 
         public CustomerEditModel(AppDbContext context)
         {
@@ -21,9 +21,9 @@ namespace GreenGardens.Pages
 
         public async Task<IActionResult> OnGetAsync(Guid Customerid)
         {
-            Item = await _dbConnection.customer.FindAsync(Customerid);
+            Customer = await _dbConnection.customer.FindAsync(Customerid);
 
-            if (Item == null)
+            if (Customer == null)
             {
                 return NotFound();
             }
@@ -33,12 +33,8 @@ namespace GreenGardens.Pages
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
-            var itemToUpdate = await _dbConnection.customer.FindAsync(Item.Customerid);
+            var itemToUpdate = await _dbConnection.customer.FindAsync(Customer.Customerid);
 
             if (itemToUpdate == null)
             {
@@ -47,10 +43,12 @@ namespace GreenGardens.Pages
 
             // Update the properties of the customer
 
-            itemToUpdate.f_name = Item.f_name;
-            itemToUpdate.s_name = Item.s_name;
-            itemToUpdate.email = Item.email;
-            itemToUpdate.loyalty_points = Item.loyalty_points;
+            itemToUpdate.f_name = Customer.f_name;
+            itemToUpdate.s_name = Customer.s_name;
+            itemToUpdate.email = Customer.email;
+            itemToUpdate.loyalty_points = Customer.loyalty_points;
+
+
 
 
 

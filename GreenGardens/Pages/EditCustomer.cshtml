@@ -1,17 +1,17 @@
 ﻿@page "{Customerid:Guid}"
 @model GreenGardens.Pages.CustomerEditModel
 
-<h1>Edit Item</h1>
+<h1>Edit Customer</h1>
 
 <form method="post">
-    <input type="hidden" asp-for="Item.Customerid" />
+    <input type="hidden" asp-for="Customer.Customerid" />
     <!-- First Name -->
     <div class="form-group row">
         <div class="col-4">
             <label>First Name:</label>
         </div>
         <div class="col-8">
-            <input type="text" asp-for="Item.f_name" />
+            <input type="text" asp-for="Customer.f_name" />
         </div>
     </div>
 
@@ -21,7 +21,7 @@
             <label>Second Name: </label>
         </div>
         <div class="col-8">
-            <input type="text" asp-for="Item.s_name" class="form-control" />
+            <input type="text" asp-for="Customer.s_name" class="form-control" />
         </div>
     </div>
     <!-- Email-->
@@ -30,16 +30,16 @@
             <label>Email: </label>
         </div>
         <div class="col-8">
-            <input type="text" asp-for="Item.email" class="form-control" />
+            <input type="text" asp-for="Customer.email" class="form-control" />
         </div>
     </div>
-    <!-- SLoyalty Points-->
+    <!-- Loyalty Points-->
     <div class="form-group row">
         <div class="col-4">
             <label>Loyalty Points: </label>
         </div>
         <div class="col-8">
-            <input type="text" asp-for="Item.loyalty_points" class="form-control" />
+            <input type="text" asp-for="Customer.loyalty_points" class="form-control" />
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Save Changes</button>
