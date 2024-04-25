@@ -96,6 +96,7 @@
     <tbody>
         @foreach (var product in Model.Products.OrderByDescending(l => l.Price).Take(5))
         {
+            <!--Sorts table from highest to lowest-->
             <tr>
                 <td>@product.Name</td>
                 <td>£@product.Price</td>
@@ -112,7 +113,7 @@
     </tbody>
 </table>
 
-<h2>Lowest to highest </h2>
+<h2>Lowest to highest </h2><!--Sorts table lowest to highest-->
 <table class="table">
     <thead>
         <tr>

@@ -9,9 +9,13 @@ namespace GreenGardens.Model
         [Key]
         public Guid OrderId { get; set; }
 
-        public int productId { get; set; }
+        public Guid productId { get; set; }
+        public product product { get; set; }
 
-        public int customerId { get; set; }
+        public Guid customerId { get; set; }
+        public customer customer { get; set; }
+
+
 
 
     }

@@ -26,7 +26,8 @@ namespace GreenGardens.Model
 
         [AllowNull]
         public string? ImagePath { get; set; }
-       
+
+        public List<order>? Orders { get; set; }
 
     }
 }

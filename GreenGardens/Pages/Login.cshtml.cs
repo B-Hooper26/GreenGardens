@@ -55,7 +55,12 @@ namespace GreenGardens.Pages
                     CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(claimsIdentity),
                     authProperties);
-                if(user.Admin == true)
+
+
+                // Store email in session
+                HttpContext.Session.SetString("UserEmail", user.email);
+
+                if (user.Admin == true)
                 {
                     return RedirectToPage("Products"); //Redirects admin to the admin page
                 }

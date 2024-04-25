@@ -30,17 +30,7 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-page="">Basket</a>
-                            </li>
-                        }
-                        @if(!User.Identity.IsAuthenticated){
-                            <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
-                            </li>
-                        }
-                        else{
-                            <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
+                                <a class="nav-link text-dark" asp-area="" asp-page="/BasketPage">Basket</a>
                             </li>
                         }
                         @if(!User.Identity.IsAuthenticated){
@@ -55,6 +45,27 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-page="/Graphs/Graph">Graphs</a>
+                            </li>
+                        }
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Login">Login</a>
+                            </li>
+                        }
+                        else{
+                            <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
+                            </li>
+                        }
+
+
+
+
+                        <!--Account setting page-->
+                        @if (User.Identity.IsAuthenticated){
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account">Account Settings</a>
                             </li>
                         }
                     </ul>

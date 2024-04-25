@@ -12,8 +12,21 @@ namespace GreenGardens.Data
         public DbSet<admin> admin { get; set; }
         public DbSet<order> order { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<order>()
+                .HasKey(cs => new { cs.productId, cs.customerId });
 
+            modelBuilder.Entity<order>()
+                .HasOne(cs => cs.customer)
+                .WithMany(s => s.Orders)
+                .HasForeignKey(cs => cs.customerId);
 
+            modelBuilder.Entity<order>()
+                .HasOne(cs => cs.product)
+                .WithMany(c => c.Orders)
+                .HasForeignKey(cs => cs.productId);
+        }
 
         // Constructor for the AppDbContext, receiving DbContextOptions of AppDbContext type.
         // It passes these options to the base DbContext class.

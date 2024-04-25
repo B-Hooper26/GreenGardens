@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+<div class="text-center">
+        <h1 class="display-4">Basket</h1>
+    </div>
+
+<table class="table">
+    <thead>
+        <tr style="text-align: center">
+            <th>Order ID</th>
+            <th>Product Name</th>
+            <th>Product Price</th>
+            <th>Customer ID</th>
+            <th>Customer </th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.orders)
+        {
+            //Prints each product the user has added
+            <tr style="text-align: center">
+                <td>@product.OrderId</td> 
+                <td>£@product.product.Name</td> 
+                <td>@product.product.Price</td>
+                <td>@product.customer.Customerid</td>
+                <td>@product.customer.f_name @product.customer.s_name</td>
+
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+
+
+

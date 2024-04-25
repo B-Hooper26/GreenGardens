@@ -92,17 +92,18 @@ namespace GreenGardens.Migrations
 
             modelBuilder.Entity("GreenGardens.Model.order", b =>
                 {
-                    b.Property<Guid>("OrderId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("productId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("customerId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("customerId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("productId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("OrderId");
+                    b.HasKey("productId", "customerId");
+
+                    b.HasIndex("customerId");
 
                     b.ToTable("order");
                 });
@@ -138,6 +139,35 @@ namespace GreenGardens.Migrations
                     b.HasKey("Productid");
 
                     b.ToTable("product");
+                });
+
+            modelBuilder.Entity("GreenGardens.Model.order", b =>
+                {
+                    b.HasOne("GreenGardens.Model.customer", "customer")
+                        .WithMany("Orders")
+                        .HasForeignKey("customerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GreenGardens.Model.product", "product")
+                        .WithMany("Orders")
+                        .HasForeignKey("productId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("customer");
+
+                    b.Navigation("product");
+                });
+
+            modelBuilder.Entity("GreenGardens.Model.customer", b =>
+                {
+                    b.Navigation("Orders");
+                });
+
+            modelBuilder.Entity("GreenGardens.Model.product", b =>
+                {
+                    b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618
         }

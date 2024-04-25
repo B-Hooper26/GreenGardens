@@ -42,19 +42,6 @@ namespace GreenGardens.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "order",
-                columns: table => new
-                {
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    productId = table.Column<int>(type: "int", nullable: false),
-                    customerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_order", x => x.OrderId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "product",
                 columns: table => new
                 {
@@ -70,6 +57,36 @@ namespace GreenGardens.Migrations
                 {
                     table.PrimaryKey("PK_product", x => x.Productid);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "order",
+                columns: table => new
+                {
+                    productId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    customerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_order", x => new { x.productId, x.customerId });
+                    table.ForeignKey(
+                        name: "FK_order_customer_customerId",
+                        column: x => x.customerId,
+                        principalTable: "customer",
+                        principalColumn: "Customerid",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_order_product_productId",
+                        column: x => x.productId,
+                        principalTable: "product",
+                        principalColumn: "Productid",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_order_customerId",
+                table: "order",
+                column: "customerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -78,10 +95,10 @@ namespace GreenGardens.Migrations
                 name: "admin");
 
             migrationBuilder.DropTable(
-                name: "customer");
+                name: "order");
 
             migrationBuilder.DropTable(
-                name: "order");
+                name: "customer");
 
             migrationBuilder.DropTable(
                 name: "product");
