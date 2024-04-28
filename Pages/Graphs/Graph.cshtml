@@ -1,0 +1,287 @@
+﻿@page
+@model GreenGardens.Pages.Graphs.GraphModel
+@{
+	ViewData["Title"] = "Price Graph";
+}
+
+
+<div>
+	<h2>Stock Quantity and Expectancy for each item</h2>
+	<canvas id="Quantitygraph"></canvas>
+</div>
+<div>
+    <h2>Price per item</h2>
+    <canvas id="Item_Price"></canvas>
+</div>
+<div>
+    <h2>Expected items </h2>
+    <canvas id="Expected"></canvas>
+</div>
+<div>
+    <h2>Expected items </h2>
+    <canvas id="Current"></canvas>
+</div>
+
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script >
+		    var ctx = document.getElementById('Quantitygraph').getContext('2d');
+			    var tasksData = @Html.Raw(Model.ProductJson);
+			    var tasksGraph = new Chart(ctx, {
+			    type: 'bar',
+		    data: {
+				    labels: tasksData.map(t => new String(t.Name).toString()),
+			    datasets: [{
+				    label: 'Quantity of stock',
+				    data: tasksData.map(t => t.Stock_Quantity),
+					    backgroundColor: 'rgba(7, 229, 7, 0.33)',
+				    borderColor: 'black',
+				    borderWidth: 1,
+			    },
+				    {
+					    label: 'Expected Stock',
+					    data: tasksData.map(t => t.Expected_Stock),
+					    backgroundColor: 'rgba(7, 0, 255, 0.33)',
+					    borderColor: 'black',
+					    borderWidth: 1,
+				    },
+
+			    ]
+		    },
+		    options: {
+			    scales: {
+				    y: {
+					    beginAtZero: true
+				    }
+			    }
+		    }
+	    });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('Item_Price').getContext('2d');
+        var tasksData = @Html.Raw(Model.ProductJson);
+        var tasksGraph = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tasksData.map(t => new String(t.Name).toString()),
+                datasets: [{
+                    label: 'Price of Item',
+                    data: tasksData.map(t => t.Price),
+                    backgroundColor: 'rgba(240, 143, 175, 0.75)',
+                    borderColor: 'black',
+                    borderWidth: 1,
+                },
+ 
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <!--RADAR GRAPH-->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('Expected').getContext('2d');
+        var tasksData = @Html.Raw(Model.ProductJson);
+        var tasksGraph = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tasksData.map(t => new String(t.Name).toString()),
+                datasets: [{
+                    label: 'Expected Stock',
+                    data: tasksData.map(t => t.Stock_Quantity),
+                    backgroundColor: 'rgba(7,229,7,0.33)',
+                    borderColor: 'black',
+                    borderWidth: 1,
+                },
+
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('Current').getContext('2d');
+        var tasksData = @Html.Raw(Model.ProductJson);
+        var tasksGraph = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: tasksData.map(t => new String(t.Name).toString()),
+                datasets: [{
+                    label: 'Quantity of stock',
+                    data: tasksData.map(t => t.Stock_Quantity),
+                    backgroundColor: 'rgba(43, 172, 230, 0.72)',
+                    borderColor: 'black',
+                    borderWidth: 1,
+                },
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+}
+    <div class="text-center">
+        <h1 class="display-4">Under Stocked Products</h1>
+    </div>
+    <table class="table" style="border:solid; border-color:black;">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Stock Quantity</th>
+                <th>Expected Stock</th>
+                <th>Stock Level</th>
+                <th>Image</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var product in Model.Products)//layout the table of products that are under stock
+        {
+            @if (product.Expected_Stock > @product.Stock_Quantity)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>£@product.Price</td>
+                    <td>@product.Description</td>
+                    <td>@product.Stock_Quantity</td>
+                    <td>@product.Expected_Stock</td>
+                    <td>Low Stock Levels</td>
+                    <td>
+                        <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <h1 class="display-4">Highest To Lowest</h1>
+</div>
+<table class="table" style="border:solid; border-color:black;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products.OrderByDescending(l => l.Price).Take(5))
+        {
+            <!--Sorts table from highest to lowest-->
+            <tr>
+                <td>@product.Name</td>
+                <td>£@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Stock_Quantity</td>
+                <td>@product.Expected_Stock</td>
+                <td>High Stock Levels</td>
+                <td>
+                    <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table >
+<div class="text-center">
+    <h1 class="display-4">Lowest To Highest</h1>
+</div><!--Sorts table lowest to highest-->
+<table class="table" style="border:solid; border-color:black;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products.OrderBy(l => l.Price).Take(5))
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>£@product.Price</td>
+                <td>@product.Description</td>
+                <td>@product.Stock_Quantity</td>
+                <td>@product.Expected_Stock</td>
+                <td>High Stock Levels</td>
+                <td>
+                    <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<div class="text-center">
+    <h1 class="display-4">Over Stocked Products</h1><!--Shows the products that are higher then expected.-->
+</div>
+<table class="table" style="border:solid; border-color:black;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)//layout the table of products that are overstocked
+        {
+            @if (product.Expected_Stock < @product.Stock_Quantity)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>£@product.Price</td>
+                    <td>@product.Description</td>
+                    <td>@product.Stock_Quantity</td>
+                    <td>@product.Expected_Stock</td>
+                    <td>High Stock Levels</td>
+                    <td>
+                        <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    </td>
+                </tr>
+            }
+        }
+
+
+
+
+    </tbody>
+</table>

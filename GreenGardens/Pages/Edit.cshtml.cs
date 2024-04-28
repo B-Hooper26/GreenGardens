@@ -21,7 +21,7 @@ namespace GreenGardens.Pages
 
         public async Task<IActionResult> OnGetAsync(Guid Productid)
         {
-            Item = await _dbConnection.product.FindAsync(Productid);
+            Item = await _dbConnection.Products.FindAsync(Productid);
 
             if (Item == null)
             {
@@ -38,7 +38,7 @@ namespace GreenGardens.Pages
                 return Page();
             }
 
-            var itemToUpdate = await _dbConnection.product.FindAsync(Item.Productid);
+            var itemToUpdate = await _dbConnection.Products.FindAsync(Item.Productid);
 
             if (itemToUpdate == null)
             {

@@ -1,0 +1,32 @@
+﻿@page
+@model GreenGardens.Pages.AccountModel
+@{
+    ViewData["Title"] = "Account";
+}
+
+<h2>Account Settings</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Second Name</th>
+            <th>Email</th>
+            <th>Loyalty points </th>
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var customer in Model.userinfo)
+        {
+            <tr>
+                <td>@customer.f_name</td>
+                <td>@customer.s_name</td>
+                <td>@customer.email</td>
+                <td>@customer.loyalty_points</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

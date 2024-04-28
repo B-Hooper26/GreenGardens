@@ -21,7 +21,7 @@ namespace GreenGardens.Pages
 
         public async Task<IActionResult> OnGetAsync(Guid Customerid)
         {
-            Customer = await _dbConnection.customer.FindAsync(Customerid);
+            Customer = await _dbConnection.Users.FindAsync(Customerid);
 
             if (Customer == null)
             {
@@ -34,7 +34,7 @@ namespace GreenGardens.Pages
         public async Task<IActionResult> OnPostAsync()
         {
 
-            var itemToUpdate = await _dbConnection.customer.FindAsync(Customer.Customerid);
+            var itemToUpdate = await _dbConnection.Users.FindAsync(Customer.Customerid);
 
             if (itemToUpdate == null)
             {

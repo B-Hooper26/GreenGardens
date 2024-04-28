@@ -22,11 +22,11 @@ namespace GreenGardens.Pages.Graphs
         public List<product> Products { get; set; }
         public void OnGet()
         {
-            var items = _dbConnection.product.ToList();
+            var items = _dbConnection.Products.ToList();
             ProductJson = JsonSerializer.Serialize(items.Select(t => new { t.Name, t.Price, t.Stock_Quantity, t.Expected_Stock }));
 
 
-            Products = _dbConnection.product.ToList();
+            Products = _dbConnection.Products.ToList();
         }
 
 

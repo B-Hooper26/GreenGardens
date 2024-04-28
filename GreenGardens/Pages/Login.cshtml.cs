@@ -35,7 +35,7 @@ namespace GreenGardens.Pages
                 return Page(); // Return to the page if validation fails
             }
 
-            var user = _context.customer.FirstOrDefault(u => u.email == Email);
+            var user = _context.Users.FirstOrDefault(u => u.email == Email);
 
             // Implement password verification logic here
             if (user != null && VerifyPassword(Password, user.password))

@@ -1,0 +1,64 @@
+﻿@page
+@model GreenGardens.Pages.CreateModel
+@{
+}
+<h1>Add Item</h1>
+
+<div class="container border p-5">
+    <form method="post">
+        <!-- Name -->
+        <div class="form-group row">
+            <div class="col-4">
+                <label>Name:</label>
+            </div>
+            <div class="col-8">
+                <input type="text" asp-for="Item.Name" />
+            </div>
+        </div>
+
+        <!-- Price-->
+        <div class="form-group row">
+            <div class="col-4">
+                <label>Price: </label>
+            </div>
+            <div class="col-8">
+                <input type="text" asp-for="Item.Price" class="form-control" />
+            </div>
+        </div>
+        <!-- Description-->
+        <div class="form-group row">
+            <div class="col-4">
+                <label>Description: </label>
+            </div>
+            <div class="col-8">
+                <input type="text" asp-for="Item.Description" class="form-control" />
+            </div>
+        </div>
+        <!-- Stock Quantity-->
+        <div class="form-group row">
+            <div class="col-4">
+                <label>Stock Quantity: </label>
+            </div>
+            <div class="col-8">
+                <input type="text" asp-for="Item.Stock_Quantity" class="form-control" />
+            </div>
+        </div>
+        <!-- Expected Stock-->
+        <div class="form-group row">
+            <div class="col-4">
+                <label>Expected Stock: </label>
+            </div>
+            <div class="col-8">
+                <input type="text" asp-for="Item.Expected_Stock" class="form-control" />
+            </div>
+        </div>
+
+
+        <!-- Submit Button -->
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" class="btn btn-block btn-secondary">Add Item</button>
+            </div>
+        </div>
+    </form>
+</div>

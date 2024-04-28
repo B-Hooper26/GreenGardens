@@ -1,7 +1,7 @@
 ﻿using GreenGardens.Model;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-namespace AddToTable.Model
+namespace GreenGardens.Model
 {
     public class Basket
     {
@@ -11,7 +11,7 @@ namespace AddToTable.Model
         [Required]
         public Guid productid { get; set; }
 
-        [ForeignKey("Productid")]
+        [ForeignKey("productid")]
         public product product { get; set; }
 
         public int Quantity { get; set; } = 1;  

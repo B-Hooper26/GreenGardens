@@ -21,15 +21,15 @@ namespace GreenGardens.Pages
         public void OnGet(Guid Productid)
         {
             // Retrieve the item to be deleted
-            Item = _dbConnection.product.FirstOrDefault(t => t.Productid == Productid);
+            Item = _dbConnection.Products.FirstOrDefault(t => t.Productid == Productid);
         }
 
         public async Task<IActionResult> OnPostAsync(Guid Productid)
         {
-            var itemToDelete = _dbConnection.product.FirstOrDefault(t => t.Productid == Productid);
+            var itemToDelete = _dbConnection.Products.FirstOrDefault(t => t.Productid == Productid);
             if (itemToDelete != null)
             {
-                _dbConnection.product.Remove(itemToDelete);
+                _dbConnection.Products.Remove(itemToDelete);
                 await _dbConnection.SaveChangesAsync();
                 return RedirectToPage("Products");
             }

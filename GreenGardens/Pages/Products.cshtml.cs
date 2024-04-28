@@ -23,8 +23,8 @@ namespace GreenGardens.Pages
 
         public void OnGet()
         {
-            Products = _db.product.ToList();
-            user = _db.customer.ToList();
+            Products = _db.Products.ToList();
+            user = _db.Users.ToList();
 
         }
     }

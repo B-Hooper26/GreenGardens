@@ -31,23 +31,23 @@ namespace GreenGardens.Pages
         public List<order> Order { get; set; }
         public async Task OnGetAsync()
         {
-            Products = await _db.product.ToListAsync();
+            Products = await _db.Products.ToListAsync();
         }
         public void OnGet()
         {
      
-            Customer = _db.customer.ToList();
-            Order = _db.order.ToList();
+            Customer = _db.Users.ToList();
+            Order = _db.Orders.ToList();
         }
         public async Task<IActionResult> OnPostAddProductAsync()
         {
             if (!ModelState.IsValid)
             {
-                Products = await _db.product.ToListAsync(); // Re-load products if form is invalid
+                Products = await _db.Products.ToListAsync(); // Re-load products if form is invalid
                 return Page();
             }
 
-            _db.product.Add(Product);
+            _db.Products.Add(Product);
             await _db.SaveChangesAsync();
             return RedirectToPage(); // Refresh the page or redirect to a confirmation page
         }
@@ -60,7 +60,7 @@ namespace GreenGardens.Pages
                 return RedirectToPage("/Login");
             }
 
-            var productToAdd = await _db.product.FindAsync(productId);
+            var productToAdd = await _db.Products.FindAsync(productId);
             if (productToAdd == null)
             {
                 return NotFound();

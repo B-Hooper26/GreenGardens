@@ -1,0 +1,160 @@
+﻿@page
+@model GreenGardens.Pages.ProductsModel
+
+<!--ADMIN PAGE-->
+@{
+    ViewData["Title"] = "Products";
+
+}
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+{
+    <a asp-page="Create" class="btn btn-primary"style="border-radius: 12px; background-color: lightgray; border: solid; color: black;"> Add Item</a>
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+</div>
+
+<table class="table" style="border:solid; border-color:black;">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Stock Quantity</th>
+            <th>Expected Stock</th>
+            <th>Stock Level</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        
+        @foreach (var product in Model.Products)//layout the table of products
+        {
+            @if (@product.Stock_Quantity < @product.Expected_Stock)//When stock is lower then the expected stock.
+            {
+                <tr>
+                    <td>@product.Name</td> 
+                    <td>£@product.Price</td> 
+                    <td>@product.Description</td>
+                    <td style="color: red; font-size: large; font-weight: bolder">@product.Stock_Quantity</td> <!--When stock is lower then stock expected, this will appear.-->
+                    <td style="color: green; font-size: large; font-weight: bolder">@product.Expected_Stock</td>
+                    <td style="color: red; font-size: large; font-weight: bolder">Lower Stock  then expected</td>
+                    <td>
+                        <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    </td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+                        {
+                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Edit</a>
+                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Delete</a>
+
+
+                        }
+                    </td>
+
+                </tr>
+               
+            }
+            else if (@product.Stock_Quantity > @product.Expected_Stock)//When stock is Higher then the expected stock.
+            {
+                <tr>
+                    <td>@product.Name</td> 
+                    <td>£@product.Price</td> 
+                    <td>@product.Description</td>
+                    <td style="color:darkorange; font-size: large; font-weight: bolder">@product.Stock_Quantity</td> <!--When stock is lower then stock expected, this will appear.-->
+                    <td style="color: green; font-size: large; font-weight: bolder">@product.Expected_Stock</td>
+                    <td style="color: red; font-size: large; font-weight: bolder">Higher Stock then expected</td>
+                    <td>
+                        <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    </td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+                        {
+                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Edit</a>
+                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Delete</a>
+
+
+                        }
+                    </td>
+
+                </tr>
+               
+            }
+
+            else
+            {//When stock is the same as the expected stock.
+                <tr>
+                    <td>@product.Name</td>
+                    <td>£@product.Price</td>
+                    <td>@product.Description</td>
+                    <td style="color: green; font-size: large; font-weight: bolder">@product.Stock_Quantity</td>
+                    <td style="color: green; font-size: large; font-weight: bolder">@product.Expected_Stock</td>
+                    <td style="color: green; font-size: large; font-weight: bolder">Good Stock Levels</td>
+                    <td>
+                        <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                    </td>
+                    <td>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+                        {
+                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Edit</a>
+                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Delete</a>
+
+
+                        }
+                    </td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+
+<div class="text-center">
+    <h1 class="display-4">Customers</h1>
+</div>
+
+<table class="table" style="border:solid; border-color:black;">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Second Name</th>
+            <th>Email</th>
+            <th>Loyalty points </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        
+        @foreach (var product in Model.user)//layout the table of products
+        {
+            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+            {
+                
+                <tr>
+                    <td>@product.f_name</td>
+                    <td>@product.s_name</td>
+                    <td>@product.email</td>
+                    <td>@product.loyalty_points</td>
+                    <td>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+                        {
+                            @if(@product.Admin == false){
+                                <a asp-page="/EditCustomer" asp-route-Customerid="@product.Customerid" class="btn btn-primary">Edit</a>
+                                <a asp-page="/DeleteCustomer" asp-route-Customerid="@product.Customerid" class="btn btn-primary">Delete</a>
+                            }
+
+
+                        }
+                    </td>
+                </tr>
+
+            }
+        }
+    </tbody>
+</table>
+

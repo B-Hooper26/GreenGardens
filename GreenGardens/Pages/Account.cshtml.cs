@@ -30,11 +30,11 @@ namespace GreenGardens.Pages
 
         public void OnGet()
         {
-            userinfo = _dbConnection.customer.ToList();
+            userinfo = _dbConnection.Users.ToList();
             var email = HttpContext.Session.GetString("UserEmail");
             if (!string.IsNullOrEmpty(email))
             {
-                userinfo = _dbConnection.customer.Where(c => c.email == email).ToList();
+                userinfo = _dbConnection.Users.Where(c => c.email == email).ToList();
             }
 
 

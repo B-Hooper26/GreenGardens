@@ -1,0 +1,49 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+@if (!User.Identity.IsAuthenticated)
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome to Green Gardens</h1>
+        <p>You can browse the products now. If you wish to shop, please log in.</p>
+        <!-- Submit Button -->
+        <div class="form-group">
+            <a asp-page="Login" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Log in</a><!-- Takes user to the login page-->
+        </div>
+    </div>
+}
+
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+</div>
+<table class="table" style="border:solid; border-color:black;">
+    <thead>
+        <tr style="text-align: center">
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.products)
+        {
+            <tr style="text-align: center">
+                <td>@product.Name</td> 
+                <td>£@product.Price</td> 
+                <td>@product.Description</td>
+                <td>
+                    <img src="@product.ImagePath" alt="Product Image" style="width:70px">
+                </td>
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+
+
+

@@ -36,7 +36,7 @@ namespace GreenGardens.Pages
             }
             Customer.loyalty_points = 0;
             Customer.password = HashPassword(Customer.password); // Hash the password before saving
-            _context.customer.Add(Customer); // Add the new user to the database
+            _context.Users.Add(Customer); // Add the new user to the database
             _context.SaveChanges(); // Commit the changes to the database
             return RedirectToPage("Login"); // Redirect to the login page on successful registration
         }

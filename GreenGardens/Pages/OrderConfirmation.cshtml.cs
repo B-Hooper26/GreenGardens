@@ -23,7 +23,7 @@ public class OrderConfirmationModel : PageModel
     public async Task<IActionResult> OnGetAsync(int orderId)
     {
         OrderId = orderId;
-        Order = await _db.order
+        Order = await _db.Orders
             .Include(o => o.Items)
             .ThenInclude(i => i.product)
             .FirstOrDefaultAsync(o => o.OrderId == orderId);

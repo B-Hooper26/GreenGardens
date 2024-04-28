@@ -30,7 +30,7 @@ namespace GreenGardens.Pages
             //}
 
             // Set a breakpoint here to inspect the 'Item' object
-            _dbConnection.product.Add(Item);
+            _dbConnection.Products.Add(Item);
             _dbConnection.SaveChanges();
 
             return RedirectToPage("Products");

@@ -30,10 +30,9 @@ namespace GreenGardens.Pages
 
         public void OnGet()
         {
-            products = _dbConnection.product.ToList();
-            customers = _dbConnection.customer.ToList();
-            admins = _dbConnection.admin.ToList();
-            orders = _dbConnection.order.ToList();
+            products = _dbConnection.Products.ToList();
+            customers = _dbConnection.Users.ToList();
+            orders = _dbConnection.Orders.ToList();
 
 
         }

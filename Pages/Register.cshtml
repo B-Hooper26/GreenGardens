@@ -1,0 +1,43 @@
+﻿@page
+@model GreenGardens.Pages.RegisterModel
+@{
+}
+<h1>Register</h1>
+
+<div class="container border p-5">
+    <form method="post">
+        <!-- Firstname Field -->
+        <div class="form-group">
+            <label>Firstname:</label>
+            <input asp-for="Customer.f_name" class="form-control" />
+        </div>
+
+        <!-- Surname Field -->
+        <div class="form-group">
+            <label>Surname:</label>
+            <input asp-for="Customer.s_name" class="form-control" />
+        </div>
+
+        <!-- Email Field -->
+        <div class="form-group">
+            <label>Email:</label>
+            <input asp-for="Customer.email" type="email" class="form-control" />
+        </div>
+
+        <!-- Password Field -->
+        <div class="form-group">
+            <label>Password:</label>
+            <input asp-for="Customer.password" type="password" class="form-control" />
+        </div>
+        <!-- Admin Field -->
+        <div class="form-group">
+            <label>Are you an Admin:</label>
+            <input type="checkbox" asp-for="Customer.Admin" />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Register</button>
+        </div>
+    </form>
+</div>

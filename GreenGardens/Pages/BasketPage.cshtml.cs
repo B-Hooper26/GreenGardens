@@ -55,7 +55,7 @@ namespace GreenGardens.Pages
 
             // Create a new order
             var Order = new order { UserId = userId };
-            _db.order.Add(Order);
+            _db.Orders.Add(Order);
             await _db.SaveChangesAsync(); // Save to get OrderId
 
             // Add items to OrderItems

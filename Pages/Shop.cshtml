@@ -1,0 +1,61 @@
+﻿@page
+@model GreenGardens.Pages.ProductsModel
+@{
+    ViewData["Title"] = "Products";
+
+}
+
+<form method="post" class="searchForm" >
+    <input type="text" name="Name" />
+    <input type="submit" value="Search"<!--SEARCH BAR-->
+</form>
+@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+{
+    <a asp-page="Create" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;"> Add Item</a>
+}
+
+
+
+
+<div class="text-center">
+        <h1 class="display-4">Shop</h1>
+</div>
+<table class="table" style="border:solid; border-color:black; ">
+    <thead style="width: 100%">
+        <tr> 
+            <th>Name</th>
+            <th>Price</th>
+            <th>Description</th> <!--What the user will see-->
+            <th>Image</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var product in Model.Products)//layout the table of products
+        {
+            <tr>
+                <td>@product.Name</td> 
+                <td>£@product.Price</td> 
+                <td>@product.Description</td>
+                <td>
+                    <img src="@product.ImagePath" alt="Product Image" style="width:100px">
+                </td>
+                <td>
+                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
+                    {
+                        <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Edit</a>
+                        <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Delete</a>
+
+                    }
+                    <form method="post" asp-page-handler="AddToBasket" asp-route-Productid="@product.Productid">
+                        <button type="submit" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Add to Basket</button>
+                    </form>
+                </td>
+            </tr>
+        }
+
+
+
+    </tbody>
+</table>
+
