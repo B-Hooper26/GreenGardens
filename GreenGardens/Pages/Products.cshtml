@@ -8,13 +8,15 @@
 }
 @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
 {
-    <a asp-page="Create" class="btn btn-primary"> Add Item</a>
+    <a asp-page="Create" class="btn btn-primary"style="border-radius: 12px; background-color: lightgray; border: solid; color: black;"> Add Item</a>
 }
 
 
-<h2>Products</h2>
+<div class="text-center">
+    <h1 class="display-4">Products</h1>
+</div>
 
-<table class="table">
+<table class="table" style="border:solid; border-color:black;">
     <thead>
         <tr>
             <th>Name</th>
@@ -46,8 +48,8 @@
                     <td>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
                         {
-                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary">Edit</a>
-                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary">Delete</a>
+                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Edit</a>
+                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Delete</a>
 
 
                         }
@@ -71,8 +73,8 @@
                     <td>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
                         {
-                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary">Edit</a>
-                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary">Delete</a>
+                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Edit</a>
+                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Delete</a>
 
 
                         }
@@ -97,8 +99,8 @@
                     <td>
                         @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))//Only will run if user is admin.
                         {
-                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary">Edit</a>
-                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary">Delete</a>
+                            <a asp-page="/Edit" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Edit</a>
+                            <a asp-page="/Delete" asp-route-Productid="@product.Productid" class="btn btn-primary" style="border-radius: 12px; background-color: lightgray; border: solid; color: black;">Delete</a>
 
 
                         }
@@ -111,9 +113,11 @@
 </table>
 
 
-<h2>Customers</h2>
+<div class="text-center">
+    <h1 class="display-4">Customers</h1>
+</div>
 
-<table class="table">
+<table class="table" style="border:solid; border-color:black;">
     <thead>
         <tr>
             <th>First Name</th>

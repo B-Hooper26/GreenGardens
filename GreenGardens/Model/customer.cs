@@ -26,8 +26,7 @@ namespace GreenGardens.Model
         [Required]
         public bool Admin { get; set; }
 
-        [AllowNull]
-        public List<order>? Orders { get; set; }
+  
 
     
         

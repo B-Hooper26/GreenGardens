@@ -11,7 +11,7 @@ namespace GreenGardens.Pages
     {
         private readonly AppDbContext _db;
 
-        public List<product> Products { get; set; }
+        public List<product> Products { get; set; } = new List<product>();
         public List<customer> user { get; set; }
 
 

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AddToTable.Model;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
 
 namespace GreenGardens.Model
 {
@@ -7,16 +9,15 @@ namespace GreenGardens.Model
     {
 
         [Key]
-        public Guid OrderId { get; set; }
+        public int OrderId { get; set; }
 
-        public Guid productId { get; set; }
-        public product product { get; set; }
+        [Required]
+        public string UserId { get; set; }
 
-        public Guid customerId { get; set; }
-        public customer customer { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
 
+        public virtual List<OrderItem> Items { get; set; } = new List<OrderItem>();
 
-
-
+        public decimal TotalAmount { get; set; }
     }
 }

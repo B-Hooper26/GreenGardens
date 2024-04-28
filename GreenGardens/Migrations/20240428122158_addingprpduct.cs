@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreenGardens.Migrations
 {
-    public partial class addingproduct : Migration
+    public partial class addingprpduct : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,6 +42,21 @@ namespace GreenGardens.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "order",
+                columns: table => new
+                {
+                    OrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_order", x => x.OrderId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "product",
                 columns: table => new
                 {
@@ -59,34 +74,69 @@ namespace GreenGardens.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "order",
+                name: "Baskets",
                 columns: table => new
                 {
-                    productId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    customerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    BasketId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    productid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Productid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_order", x => new { x.productId, x.customerId });
+                    table.PrimaryKey("PK_Baskets", x => x.BasketId);
                     table.ForeignKey(
-                        name: "FK_order_customer_customerId",
-                        column: x => x.customerId,
-                        principalTable: "customer",
-                        principalColumn: "Customerid",
+                        name: "FK_Baskets_product_Productid",
+                        column: x => x.Productid,
+                        principalTable: "product",
+                        principalColumn: "Productid",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderItems",
+                columns: table => new
+                {
+                    OrderItemId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderId = table.Column<int>(type: "int", nullable: false),
+                    ProductId_ = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Productid = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderItems", x => x.OrderItemId);
+                    table.ForeignKey(
+                        name: "FK_OrderItems_order_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "order",
+                        principalColumn: "OrderId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_order_product_productId",
-                        column: x => x.productId,
+                        name: "FK_OrderItems_product_Productid",
+                        column: x => x.Productid,
                         principalTable: "product",
                         principalColumn: "Productid",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_order_customerId",
-                table: "order",
-                column: "customerId");
+                name: "IX_Baskets_Productid",
+                table: "Baskets",
+                column: "Productid");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_OrderId",
+                table: "OrderItems",
+                column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderItems_Productid",
+                table: "OrderItems",
+                column: "Productid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -95,10 +145,16 @@ namespace GreenGardens.Migrations
                 name: "admin");
 
             migrationBuilder.DropTable(
-                name: "order");
+                name: "Baskets");
 
             migrationBuilder.DropTable(
                 name: "customer");
+
+            migrationBuilder.DropTable(
+                name: "OrderItems");
+
+            migrationBuilder.DropTable(
+                name: "order");
 
             migrationBuilder.DropTable(
                 name: "product");

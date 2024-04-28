@@ -22,6 +22,63 @@ namespace GreenGardens.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("AddToTable.Model.Basket", b =>
+                {
+                    b.Property<int>("BasketId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketId"), 1L, 1);
+
+                    b.Property<Guid>("Productid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("productid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("BasketId");
+
+                    b.HasIndex("Productid");
+
+                    b.ToTable("Baskets");
+                });
+
+            modelBuilder.Entity("AddToTable.Model.OrderItem", b =>
+                {
+                    b.Property<int>("OrderItemId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderItemId"), 1L, 1);
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("ProductId_")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("Productid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderItemId");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("Productid");
+
+                    b.ToTable("OrderItems");
+                });
+
             modelBuilder.Entity("GreenGardens.Model.admin", b =>
                 {
                     b.Property<Guid>("id")
@@ -92,18 +149,23 @@ namespace GreenGardens.Migrations
 
             modelBuilder.Entity("GreenGardens.Model.order", b =>
                 {
-                    b.Property<Guid>("productId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.Property<Guid>("customerId")
-                        .HasColumnType("uniqueidentifier");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("productId", "customerId");
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.HasIndex("customerId");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
 
                     b.ToTable("order");
                 });
@@ -141,33 +203,39 @@ namespace GreenGardens.Migrations
                     b.ToTable("product");
                 });
 
-            modelBuilder.Entity("GreenGardens.Model.order", b =>
+            modelBuilder.Entity("AddToTable.Model.Basket", b =>
                 {
-                    b.HasOne("GreenGardens.Model.customer", "customer")
-                        .WithMany("Orders")
-                        .HasForeignKey("customerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("GreenGardens.Model.product", "product")
-                        .WithMany("Orders")
-                        .HasForeignKey("productId")
+                        .WithMany()
+                        .HasForeignKey("Productid")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("customer");
 
                     b.Navigation("product");
                 });
 
-            modelBuilder.Entity("GreenGardens.Model.customer", b =>
+            modelBuilder.Entity("AddToTable.Model.OrderItem", b =>
                 {
-                    b.Navigation("Orders");
+                    b.HasOne("GreenGardens.Model.order", "order")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GreenGardens.Model.product", "product")
+                        .WithMany()
+                        .HasForeignKey("Productid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("order");
+
+                    b.Navigation("product");
                 });
 
-            modelBuilder.Entity("GreenGardens.Model.product", b =>
+            modelBuilder.Entity("GreenGardens.Model.order", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("Items");
                 });
 #pragma warning restore 612, 618
         }

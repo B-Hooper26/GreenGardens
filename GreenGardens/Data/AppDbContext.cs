@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using GreenGardens.Model;
+using AddToTable.Model;
 
 namespace GreenGardens.Data
 {
@@ -11,22 +12,8 @@ namespace GreenGardens.Data
         public DbSet<customer> customer { get; set; }
         public DbSet<admin> admin { get; set; }
         public DbSet<order> order { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<order>()
-                .HasKey(cs => new { cs.productId, cs.customerId });
-
-            modelBuilder.Entity<order>()
-                .HasOne(cs => cs.customer)
-                .WithMany(s => s.Orders)
-                .HasForeignKey(cs => cs.customerId);
-
-            modelBuilder.Entity<order>()
-                .HasOne(cs => cs.product)
-                .WithMany(c => c.Orders)
-                .HasForeignKey(cs => cs.productId);
-        }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         // Constructor for the AppDbContext, receiving DbContextOptions of AppDbContext type.
         // It passes these options to the base DbContext class.
